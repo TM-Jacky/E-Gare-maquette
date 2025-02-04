@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foire aux Questions - Tickets Mada</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+/* Style global */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif; /* Changement de police */
+    background-color: #f9f9f1; /* Blanc cassé */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Aligner en haut */
+    min-height: 100vh;
+}
+
+
+
+/* Style du titre */
+h1 {
+    font-size: 3em; /* Taille du titre */
+    text-align: center;
+    margin: 30px 0;
+    display: inline-block;
+    white-space: nowrap; /* Évite le retour à la ligne */
+}
+
+/* Couleurs pour l'effet du titre */
+h1 span.red {
+    color: #d52b1e; /* Rouge */
+}
+
+h1 span.green {
+    color: #009d49; /* Vert */
+}
+
+/* Animation du titre lettre par lettre */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* Légère élévation */
+    }
+}
+
+/* Animation individuelle des lettres */
+@keyframes bounceLetter {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* Légère élévation */
+    }
+}
+
+/* Style de la page FAQ */
+.faq-container {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 80px; /* Espace pour le footer */
+}
+
+/* Effets des lignes de craie */
+.line {
+    height: 4px;
+    border: none;
+    margin: 20px 0;
+}
+
+/* Trais de craie */
+.white-line {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.5); /* Ombre */
+}
+
+.red-line {
+    background-color: #d52b1e;
+    box-shadow: 0 2px 5px rgba(213, 43, 30, 0.5); /* Ombre */
+}
+
+.green-line {
+    background-color: #009d49;
+    box-shadow: 0 2px 5px rgba(0, 157, 73, 0.5); /* Ombre */
+}
+
+/* Style des questions */
+.question {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre 3D */
+}
+
+/* Effet de survol sur la question */
+.question:hover {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+/* Style de la réponse */
+.answer {
+    display: none; /* Caché par défaut */
+    padding: 10px;
+    background: #f1f1f1;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+/* Footer */
+footer {
+    background-color: #fff;
+    color: #333;
+    padding: 15px;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: auto; /* Pousse le footer vers le bas */
+}
+
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+footer ul li {
+    display: inline;
+}
+
+footer ul li a {
+    color: #009d49;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer ul li a:hover {
+    color: #d52b1e;
+}
+
+footer p {
+    text-align: center;
+    margin-top: 10px;
+    color: #666;
+}
+
+/* Fixation du footer au bas de la page même si le contenu est court */
+html, body {
+    height: 100%; /* Pour assurer que le footer est au fond */
+}
+/* Animation des sections */
+section {
+    opacity: 0;
+    transform: translateY(-30px);
+    animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation des lettres du titre */
+.letter {
+    display: inline-block;
+    animation: bounceLetter 1s infinite;
+    animation-delay: 0s; /* À ajuster pour chaque lettre */
+}
+
+
+/* Global settings */
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+    height: auto;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5dc; /* Blanc cassé pour le fond */
+    overflow-y: auto;
+}
+
+
+/* Animation du titre Foire aux Questions */
+.animated-title {
+    display: inline-block;
+    font-size: 48px;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.animated-title span {
+    display: inline-block;
+    animation: bounce 0.6s ease infinite alternate;
+}
+
+@keyframes bounce {
+    to {
+        transform: translateY(-10px);
+    }
+}
+
+/* Couleurs alternées */
+.animated-title span:nth-child(odd) {
+    color: red;
+}
+
+.animated-title span:nth-child(even) {
+    color: green;
+}
+
+
+/* Contenu général */
+.content {
+    position: relative;
+    z-index: 2; /* S'assure que le contenu est au-dessus de l'animation */
+    padding: 20px;
+    text-align: center;
+    margin-top: 50px; /* Espace pour éviter chevauchement avec l'animation */
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+/* FAQ Styling */
+.faq-section {
+    background-color: rgba(255, 255, 255, 0.8); /* Fond transparent pour la section */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombres 3D */
+}
+
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Bannière principale -->
+    <div class="banner">
+
+    <!-- Titre animé -->
+    <h1 class="animated-title">
+        <span>F</span><span>O</span><span>I</span><span>R</span><span>E</span> 
+        <span>A</span><span>U</span><span>X</span> 
+        <span>Q</span><span>U</span><span>E</span><span>S</span><span>T</span><span>I</span><span>O</span><span>N</span><span>S</span>
+    </h1>
+
+    <div class="background-animation">
+        <!-- Zone d'animation d'écriture -->
+    </div>
+
+        <div class="faq-container">
+            <div class="line white-line"></div>
+            <div class="line red-line"></div>
+            <div class="line green-line"></div>
+
+    <main>
+
+
+        <div class="faq-section">
+            <div class="question" onclick="toggleAnswer('answer1')">Qu'est-ce que E-Gare ?</div>
+            <div class="answer" id="answer1">E-Gare est une plateforme dédiée à une reservation de ticket de transport en taxi-brousse à Madagascar, ainsi que des offres de voyage et des expériences locales.</div>
+
+            <div class="question" onclick="toggleAnswer('answer2')">Comment puis-je reserver mon ticket ?</div>
+            <div class="answer" id="answer2">Vous pouvez reserver vos tickets directement sur notre site web ou en nous contactant par téléphone ou par email.</div>
+
+            <div class="question" onclick="toggleAnswer('answer3')">Quels modes de paiement sont acceptés ?</div>
+            <div class="answer" id="answer3">Nous acceptons plusieurs modes de paiement, y compris les cartes de crédit, Orange Money, Airtel Money, Mvola, PayPal et les virements bancaires.</div>
+
+            <div class="question" onclick="toggleAnswer('answer4')">Y a-t-il des frais de service ?</div>
+            <div class="answer" id="answer4">Oui, des frais de service peuvent s'appliquer en fonction de l'événement ou du service réservé.</div>
+
+            <div class="question" onclick="toggleAnswer('answer5')">Puis-je annuler ma réservation ?</div>
+            <div class="answer" id="answer5">Les conditions d'annulation varient selon l'événement. Veuillez consulter notre politique d'annulation pour plus de détails.</div>
+
+            <div class="question" onclick="toggleAnswer('answer6')">Que faire si je ne reçois pas mon ticket de reservation ?</div>
+            <div class="answer" id="answer6">Si vous ne recevez pas votre ticket, veuillez nous contacter immédiatement pour que nous puissions résoudre le problème.</div>
+
+            <div class="question" onclick="toggleAnswer('answer7')">Puis-je transférer mon ticket à quelqu'un d'autre ?</div>
+            <div class="answer" id="answer7">Les transferts de tickets sont soumis aux conditions spécifiques de chaque trajet. Veuillez vérifier notre politique pour chaque trajet.</div>
+
+            <div class="question" onclick="toggleAnswer('answer8')">Quels types de voyages proposez-vous ?</div>
+            <div class="answer" id="answer8">Nous proposons une variété de trajet, y compris les trajets nationaux, regionaux, provinciaux</div>
+
+            <div class="question" onclick="toggleAnswer('answer9')">Comment puis-je contacter le service client ?</div>
+            <div class="answer" id="answer9">Vous pouvez nous contacter par email, téléphone ou via nos réseaux sociaux. Nos informations de contact sont disponibles sur notre site.</div>
+
+            <div class="question" onclick="toggleAnswer('answer10')">Y a-t-il une assistance spéciale pour les personnes handicapées ?</div>
+            <div class="answer" id="answer10">Oui, nous nous efforçons de rendre tous nos voyages accessibles. Veuillez nous contacter pour des arrangements spécifiques.</div>
+
+            <div class="question" onclick="toggleAnswer('answer11')">Où puis-je trouver mes tickets après ma reservation?</div>
+            <div class="answer" id="answer11">Après la reservation, vos tickets seront envoyés par email ou disponibles dans votre compte sur notre site.</div>
+
+            <div class="question" onclick="toggleAnswer('answer12')">Comment puis-je modifier ma réservation ?</div>
+            <div class="answer" id="answer12">Pour modifier une réservation, veuillez nous contacter le plus tôt possible. Les modifications sont soumises aux disponibilités.</div>
+
+            <div class="question" onclick="toggleAnswer('answer13')">Y a-t-il des réductions disponibles ?</div>
+            <div class="answer" id="answer13">Des réductions peuvent être disponibles pour certains trajets, notamment pour les groupes ou les réservations anticipées.</div>
+
+            <div class="question" onclick="toggleAnswer('answer14')">Comment savoir si un trajet est complet ?</div>
+            <div class="answer" id="answer14">Les trajets complets seront marqués comme tels sur notre site. Vous pouvez également vérifier en nous contactant.</div>
+
+            <div class="question" onclick="toggleAnswer('answer15')">Les tickets sont-ils remboursables ?</div>
+            <div class="answer" id="answer15">Les politiques de remboursement varient selon les situations et trajet. Veuillez consulter notre politique de remboursement pour plus de détails.</div>
+
+            <div class="question" onclick="toggleAnswer('answer16')">Que faire si le trajet est annulé ?</div>
+            <div class="answer" id="answer16">En cas d'annulation, nous informerons les clients par email et proposerons des options de remboursement.</div>
+
+            <div class="question" onclick="toggleAnswer('answer17')">Puis-je acheter des tickets sur place ?</div>
+            <div class="answer" id="answer17">Cela dépend de vous. Certains personnes prefèrent le contact physique pour leur reservation.</div>
+
+            <div class="question" onclick="toggleAnswer('answer18')">Les enfants doivent-ils avoir un ticket ?</div>
+            <div class="answer" id="answer18">Les politiques varient selon le trajet et l'age de l'enfant. Pour certains trajet, les enfants peuvent voyager gratuitement avec un seul billet pour l'adulte le parent en compagnie de l'enfant.</div>
+
+            <div class="question" onclick="toggleAnswer('answer19')">Quels sont les horaires d'ouverture du service client ?</div>
+            <div class="answer" id="answer19">Notre service client est disponible du lundi au vendredi, de 9h à 18h.</div>
+
+
+            <div class="question" onclick="toggleAnswer('answer20')">Comment me désabonner des notifications par email ?</div>
+            <div class="answer" id="answer20">Vous pouvez vous désabonner en cliquant sur le lien de désinscription présent dans nos emails ou en contactant notre service client.</div>
+
+          
+        </div>
+    </main>
+
+    <footer>
+        <p>Contactez-nous :</p>
+        <ul>
+            <li><a href="mailto:rakotomalalajacky09@gmail.com">Email</a></li>
+            <li><a href="tel:+0323857255">Téléphone</a></li>
+            <li><a href="https://wa.me/0323857255">WhatsApp</a></li>
+            <li><a href="https://m.me/jackyrakotomalala">Messenger</a></li>
+        </ul>
+<p>&copy; 2024 E-Gare. Tous droits réservés.</p>
+    </footer>
+    <script>
+        // Fonction pour afficher ou cacher les réponses
+document.addEventListener("DOMContentLoaded", function() {
+    const questions = document.querySelectorAll(".question");
+
+    questions.forEach(question => {
+        question.addEventListener("click", function() {
+            const answer = this.nextElementSibling;
+
+            if (answer.style.display === "block") {
+                answer.style.display = "none"; // Cache la réponse
+            } else {
+                answer.style.display = "block"; // Affiche la réponse
+            }
+        });
+    });
+});
+    </script>
+</body>
+</html>

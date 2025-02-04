@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Réservez vos trajets locaux à Madagascar avec E-Gare. Service de qualité et paiement sécurisé.">
+    <title>E-Gare</title>
+    <link rel="stylesheet" href="test1'.css" />
+
+    
+    <style>
+
+    /* Style pour la bannière */
+    .header-container {
+        background-color: #fff; /* Fond blanc */
+        padding: 20px;
+        border-radius: 10px; /* Coins arrondis pour un effet de section */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Ombre pour un effet 3D */
+        max-width: 1200px;
+        margin: 0 auto; /* Centrer la bannière */
+        text-align: center; /* Centrer le contenu */
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Effet 3D pour le titre */
+    .site-title {
+        font-family: 'Arial', sans-serif;
+        font-size: 42px;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Ombre pour l'effet 3D */
+    }
+
+    /* Style pour le logo à droite */
+    .site-logo {
+        width: 100px; /* Taille du logo (peut être ajustée) */
+        height: auto; /* Pour garder le ratio d'aspect */
+    }
+
+
+    /* Navigation */
+    nav ul {
+        list-style: none;
+        padding: 0;
+        display: inline-block; /* Garder les éléments sur une ligne sans affecter le centrage */
+        margin: 10px 0 0 0; /* Ajouter de l'espace sous le titre */
+    }
+
+    nav ul li {
+        display: inline; /* Afficher les éléments en ligne */
+        margin: 0 15px; /* Espacement entre les liens */
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #007BFF; /* Couleur des liens */
+        font-size: 18px;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+        color: #0056b3; /* Couleur au survol */
+    }
+
+    nav ul li a {
+        text-decoration: none; /* Supprimer les soulignements */
+        color: #333; /* Couleur par défaut (gris foncé) */
+        font-size: 18px;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+
+    /* Changer la couleur des liens au survol, mais sans le bleu */
+    nav ul li a:hover {
+        color: #555; /* Une légère variation de la couleur par survol */
+    }
+
+ 
+
+    /* Animation */
+    .active {
+        display: block; /* Afficher l'image active */
+        animation: fade 4s linear;
+    }
+
+    @keyframes fade {
+        from { opacity: 0.4; }
+        to { opacity: 1; }
+    }
+        /* Style pour le bouton de chatbot (bulle de discussion) */
+        .chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        /* Tooltip affiché lors du survol */
+        .chatbot-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background-color: #007bff;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Afficher le tooltip au survol */
+        .chatbot-button:hover .chatbot-tooltip {
+            display: block;
+        }
+
+        /* Style pour le chatbot */
+        .chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            height: 400px; /* Hauteur initiale */
+        }
+
+        .chatbot.retracted {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .chatbot-header::before {
+            content: "🤖";
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 300px;
+            display: block;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .chatbot-input button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Style pour les messages du chatbot et de l'utilisateur */
+        .chatbot-message {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .chatbot-message span {
+            margin-right: 10px;
+        }
+
+        .chatbot-message .user-message {
+            text-align: right;
+        }
+
+        .chatbot-message .chatbot-message-content {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+
+        .chatbot-message .user-message .chatbot-message-content {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+        }
+
+        /* Animation des trois points de suspension */
+        .typing-indicator {
+            display: inline-block;
+            font-size: 16px;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .typing-indicator::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 16px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            animation: typing 1.5s infinite ease-in-out;
+        }
+
+        @keyframes typing {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            50% {
+                width: 60px;
+                opacity: 1;
+            }
+            100% {
+                width: 0;
+                opacity: 0;
+            }
+        }
+
+        /* Style pour les messages en cours de saisie */
+        .typing-message {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .typing-message span {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .typing-message .typing-indicator {
+            margin-left: 10px;
+        }
+
+               /* Section À propos */
+        .about-section {
+            position: relative;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            margin: 0 auto 40px;
+            max-width: 800px;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .section-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: #e53935;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .section-text {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #666;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.8); /* Fond transparent */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre pour effet 3D */
+        }
+
+
+/* Style pour le footer */
+footer {
+    background-color: rgba(255, 255, 255, 0.8); /* Blanc avec transparence */
+    padding: 20px; /* Ajustez la taille selon vos besoins */
+    border-top: 1px solid #ddd; /* Optionnel : ajoute une bordure en haut du footer */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optionnel : ajoute une ombre légère */
+}
+
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* Style pour les colonnes du footer */
+.footer-columns {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px; /* Espacement entre les colonnes et le reste du contenu */
+}
+/* Style pour chaque colonne du footer */
+.footer-column {
+    flex: 1;
+    margin: 10px;
+    padding: 10px;
+}
+
+/* Style pour les titres des colonnes */
+.footer-column h3 {
+    color: #333; /* Couleur du texte des titres en noir */
+    margin-bottom: 10px;
+}
+
+/* Style pour les listes dans les colonnes */
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+/* Style pour les éléments de la liste */
+.footer-column ul li {
+    margin-bottom: 10px; /* Espacement entre les éléments de la liste */
+}
+
+/* Style pour les liens dans les listes */
+.footer-column ul li a {
+    color: #333; /* Couleur du texte des liens en noir */
+    text-decoration: none; /* Supprime le soulignement des liens */
+    font-size: 16px;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline; /* Souligne les liens au survol */
+}
+
+/* Style pour les images dans le footer */
+.footer-app .store-img {
+    width: 150px;
+    margin: 5px;
+}
+
+.footer-social .social-icon {
+    width: 30px;
+    margin: 5px;
+}
+
+/* Style de la modale */
+.modal {
+    display: none; /* Cacher par défaut */
+    position: fixed;
+    z-index: 999; /* S'assurer qu'elle est au-dessus du contenu */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Arrière-plan semi-transparent */
+}
+
+/* Contenu de la modale */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%; /* Taille de la modale */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: fadeIn 0.5s;
+}
+
+/* Animation d'apparition */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Bouton de fermeture */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #333;
+}
+
+.close:hover {
+    color: red;
+}
+
+/* Section des emojis */
+.emoji-section label {
+    font-size: 24px;
+    padding: 0 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.emoji-section label:hover {
+    transform: scale(1.2); /* Effet d'agrandissement au survol */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Style du formulaire dynamique */
+textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* Emoji section style with hover effect */
+.emoji-section label {
+    font-size: 24px;
+    padding: 0 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: inline-block;
+    position: relative;
+}
+
+.emoji-section label:hover {
+    transform: scale(1.2); /* Animation d'agrandissement au survol */
+}
+
+/* Affichage de la note sélectionnée */
+.selected-score {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.dynamic-section {
+    display: none; /* Cacher les sections par défaut */
+    width: 48%; /* Largeur de presque la moitié de la section du diaporama */
+    margin: 10px auto; /* Centrer horizontalement */
+    padding: 10px;
+    border-radius: 10px; /* Bordures arrondies */
+    color: black; /* Texte noir pour lisibilité */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9); /* Fond blanc transparent */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Ombres pour effet 3D */
+    position: relative; /* Nécessaire pour utiliser z-index */
+    z-index: 10; /* Assurez-vous que la section est au-dessus du footer */
+}
+
+/* Positionnement pour section A */
+#sectionA {
+    position: absolute;
+    bottom: 10%; /* Espacement depuis le bas du diaporama */
+    left: 5%; /* Position à gauche */
+}
+
+/* Positionnement pour section B */
+#sectionB {
+    position: absolute;
+    bottom: 10%; /* Espacement depuis le bas du diaporama */
+    right: 5%; /* Position à droite */
+}
+
+/* Styles pour sous-sections A' et B' */
+#sectionA2,
+#sectionB2 {
+    display: none; /* Cacher par défaut */
+    width: 48%; /* Largeur de presque la moitié de la section du diaporama */
+    margin: 0 auto; /* Centrer horizontalement */
+    padding: 10px;
+    border-radius: 10px; /* Bordures arrondies */
+    color: black; /* Texte noir pour lisibilité */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9); /* Fond blanc légèrement transparent */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: absolute; /* Positionnement absolu */
+    z-index: 10; /* S'assurer qu'elles sont au-dessus */
+}
+
+/* Positionnement pour la sous-section A' */
+#sectionA2 {
+    top: 100%; /* Juste en dessous de la section A */
+    left: 5%; /* Alignement à gauche */
+}
+
+/* Positionnement pour la sous-section B' */
+#sectionB2 {
+    top: 100%; /* Juste en dessous de la section B */
+    right: 5%; /* Alignement à droite */
+}
+
+/* Footer */
+footer {
+    margin-top: 40px; /* Ajustez selon vos besoins */
+    padding: 20px 0; /* Ajouter un peu d'espace à l'intérieur du footer */
+    background-color: #f1f1f1; /* Exemple de couleur de fond pour le footer */
+}
+
+
+
+
+/* Section Newsletter Compacte et Non Figée */
+.newsletter-section {
+    background-color: #f5f5dc; /* Fond blanc cassé */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute; /* Positionné au-dessus du footer et à droite */
+    bottom: 50px; /* Ajuste la distance au-dessus du footer */
+    right: 30px; /* Ajuste la distance à droite */
+    max-width: 300px;
+    text-align: center;
+    z-index: 10;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* Titre de la newsletter */
+.newsletter-section h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Formulaire Newsletter Compact */
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Champ d'email avec des effets interactifs */
+.newsletter-form input[type="email"] {
+    padding: 10px;
+    font-size: 14px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.newsletter-form input[type="email"]:focus {
+    border-color: #d52b1e; /* Bordure rouge au focus */
+    box-shadow: 0 0 8px rgba(213, 43, 30, 0.5); /* Effet d'ombre rouge */
+}
+
+/* Bouton d'abonnement avec effet interactif */
+.newsletter-form button {
+    background-color: #fff;
+    color: #333;
+    font-size: 14px;
+    padding: 10px 20px;
+    border: 2px solid #d52b1e; /* Contour rouge */
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Effet interactif sur le bouton au survol */
+.newsletter-form button:hover {
+    background: linear-gradient(45deg, #009d49, #d52b1e); /* Dégradé vert-rouge */
+    color: white;
+    border-color: #d52b1e; /* Contour rouge visible au survol */
+}
+
+/* Animation de survol sur toute la section */
+.newsletter-section:hover {
+    background: linear-gradient(135deg, #f0f0f0, #f5f5dc); /* Léger dégradé au survol */
+    transform: scale(1.05); /* Zoom léger */
+}
+
+/* Ajustement pour les petits écrans */
+@media (max-width: 768px) {
+    .newsletter-section {
+        right: 10px;
+        bottom: 30px;
+        max-width: 90%;
+    }
+}
+
+
+
+    </style>
+</head>
+<body>
+
+    <!-- Corps de la page -->
+    <header>
+        <div class="header-container">
+            <h1 class="site-title">E-Gare</h1>
+ <img src="Images/e-gare.png" alt="Logo E-Gare" class="site-logo">
+            <nav>
+                <ul>
+                    <li><a href="Test1.html">Accueil</a></li>
+                    <li><a href="en_savoir_plus.html">En savoir plus</a></li>
+                    <li><a href="mailto:rakotomalalajacky09@gmail.com">Nous contacter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<main>
+
+<section class="newsletter-section">
+    <h3>Recevez nos Newsletters</h3>
+    <form action="newsletter_signup.php" method="post" class="newsletter-form">
+        <input type="email" name="email" placeholder="Votre email" required>
+        <button type="submit">S'abonner</button>
+    </form>
+</section>
+
+        <section class="about-section">
+            <div class="section-content">
+                <h1 class="section-title">Ethiques & Principes</h1>
+                <div class="section-text">
+                    <p>
+                        <strong>E-Gare</strong> vise à révolutionner le secteur du numérique à Madagascar.<br> 
+Nos ambitions mélangées avec notre expertise ont su solliciter une parfaite harmonie pour vous partager le sourire qui est au cœur de notre mission. <br>
+ Voyagez avec une conscience tranquille, créez une profonde connexion avec la nature en pratiquant le voyage éco-responsable. <br>
+                        <em>« Voyagez consciemment. »</em> Accordez nous votre confiance et on s’occupe du reste.<br>
+                        
+                  </p>
+                </div>
+            </div>
+        </section>
+
+        <a href="connexion.html" class="reserve-button">Réservez Maintenant</a>
+
+
+
+<div class="floating-bg"></div>
+
+
+
+    <!-- Sections dynamiques -->
+    <div class="dynamic-section" id="sectionA">
+        <h2>Nos prestations :</h2>
+    </div>
+
+    <div class="dynamic-section" id="sectionB">
+        <h2>Avec <em>E-Gare</em> :</h2>
+    </div>
+
+    <div class="dynamic-section" id="sectionA2">
+        <ul>
+            <li>Prendre en compte votre réservation</li>
+            <li>Offrir un service de paiement sécurisé</li>
+            <li>Être à l'écoute de vos réclamations</li>
+        </ul>
+    </div>
+
+    <div class="dynamic-section" id="sectionB2">
+        <ul>
+            <li>Réservez en quelques clics</li>
+            <li>Payer en toute sécurité</li>
+            <li>Voyagez en harmonie avec vos mœurs et récoltez de joyeux souvenirs</li>
+            <li>Ayez un service client à votre écoute en toutes circonstances</li>
+            <li>Retrouvez vos historiques de voyage à tout moment</li>
+        </ul>
+    </div>
+        </section>
+
+        <section class="contact-section">
+            <p><a href="connexion.html" class="reserve-button">Réserver</a></p>
+            
+        <section>
+            <a href="suggestion.html">Vos suggestions ?</a>
+        </section>
+    </main>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <!-- Première ligne avec colonnes -->
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h3>Nous connaitre</h3>
+                <ul>
+                    <li><a href="en_savoir_plus.html">À propos de nous</a></li>
+                    <li><a href="nos_conseils.html">Nos conseils</a></li>
+                    <li><a href="responsabilite_sociale_et_environnementale.html">Responsabilité Sociale et Environnementale</a></li>
+                    <li><a href="demande_de_collaboration.html">Demande de collaboration</a></li>
+                    <li><a id="openModalBtn">Noter notre prestation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Nos idées de voyage</h3>
+                <ul>
+                    <li><a href="nos_destinations.html">Nos destinations</a></li>
+                    <li><a href="nos_bons_plans.html">Nos bons plans</a></li>
+                    <li><a href="recommandations.html">Recommandations</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Nos services</h3>
+                <ul>
+                    <li><a href="conditions_generales.html">Conditions Générales de Vente</a></li>
+                    <li><a href="faq.html">Foire aux Questions</a></li>
+                    <li><a href="#" id="openPopup">Service de réclamation</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Deuxième ligne avec images et réseaux sociaux -->
+        <div class="footer-extra">
+            <!-- Application Section -->
+            <div class="footer-app">
+                <h3>L'application E-Gare</h3>
+                <a href="https://apps.apple.com" target="_blank"><img src="Images/image_app_store.png" alt="App Store" class="store-img"></a>
+                <a href="https://play.google.com" target="_blank"><img src="Images/image_google_play.png" alt="Google Play" class="store-img"></a>
+            </div>
+
+            <!-- Réseaux Sociaux Section -->
+            <div class="footer-social">
+                <h3>Restez informé(e)</h3>
+                <p>Réseaux sociaux</p>
+                <div class="social-icons">
+                    <a href="https://youtube.com" target="_blank"><img src="Images/youtube_icon.png" alt="YouTube" class="social-icon"></a>
+                    <a href="https://x.com" target="_blank"><img src="Images/x_icon.png" alt="X" class="social-icon"></a>
+                    <a href="https://facebook.com" target="_blank"><img src="Images/facebook_icon.png" alt="Facebook" class="social-icon"></a>
+                    <a href="https://instagram.com" target="_blank"><img src="Images/instagram_icon.png" alt="Instagram" class="social-icon"></a>
+                    <a href="https://wa.me" target="_blank"><img src="Images/whatsapp_icon.png" alt="WhatsApp" class="social-icon"></a>
+                    <a href="https://tiktok.com" target="_blank"><img src="Images/tiktok_icon.png" alt="TikTok" class="social-icon"></a>
+                    <a href="https://linkedin.com" target="_blank"><img src="Images/linkedin_icon.png" alt="LinkedIn" class="social-icon"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Fenêtre modale -->
+<div id="noterModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <!-- Contenu de noter_notre_prestation.html ici -->
+        <h2 style="color:red; text-align:center;">Noter notre prestation</h2>
+        <form id="satisfaction-form">
+            <!-- Section pour les emojis -->
+            <div class="emoji-section" style="text-align:center; margin-bottom:20px;">
+                <label><input type="radio" name="satisfaction" value="1"><span>😠</span></label>
+                <label><input type="radio" name="satisfaction" value="2"><span>😕</span></label>
+                <label><input type="radio" name="satisfaction" value="3"><span>😐</span></label>
+                <label><input type="radio" name="satisfaction" value="4"><span>😶</span></label>
+                <label><input type="radio" name="satisfaction" value="5"><span>😕</span></label>
+                <label><input type="radio" name="satisfaction" value="6"><span>😐</span></label>
+                <label><input type="radio" name="satisfaction" value="7"><span>🙂</span></label>
+                <label><input type="radio" name="satisfaction" value="8"><span>😊</span></label>
+                <label><input type="radio" name="satisfaction" value="9"><span>😃</span></label>
+                <label><input type="radio" name="satisfaction" value="10"><span>😁</span></label>
+            </div>
+
+            <!-- Section dynamique si la note est <= 6 -->
+            <div id="details-section" class="hidden" style="text-align:center;">
+                <h3>Raison de votre insatisfaction :</h3>
+                <select name="reason">
+                    <option value="reservations">Prise en compte des réservations</option>
+                    <option value="payment">Service de paiement</option>
+                    <option value="complaints">Traitement des réclamations</option>
+                    <option value="other">Autres</option>
+                </select>
+                <textarea name="details" placeholder="Veuillez détailler votre insatisfaction..."></textarea>
+            </div>
+
+            <!-- Bouton pour soumettre avec l'effet fusée -->
+            <button type="submit" class="submit-btn" style="display:block;margin:20px auto;">🚀 Envoyer</button>
+        </form>
+    </div>
+</div>
+
+<!-- JS pour le pop-up -->
+<script src="footer.js"></script>
+
+<!-- Chatbot Button (Bulle de discussion) -->
+<div id="chatbot-button" class="chatbot-button">
+    <div id="chatbot-tooltip" class="chatbot-tooltip">Discuter avec 🤖 Tiketybot</div>
+</div>
+
+<!-- Chatbot Section -->
+<div id="chatbot" class="chatbot retracted">
+    <div id="chatbot-header" class="chatbot-header">
+        Tiketybot
+    </div>
+    <div id="chatbot-messages" class="chatbot-messages"></div>
+    <div id="chatbot-input" class="chatbot-input">
+        <input type="text" id="user-message" placeholder="Tapez votre message...">
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
+</div>
+
+<script>
+    // Fonction pour afficher ou masquer le chatbot
+    function toggleChatbot() {
+        const chatbot = document.getElementById('chatbot');
+        chatbot.classList.toggle('retracted');
+        const button = document.getElementById('chatbot-button');
+        if (chatbot.classList.contains('retracted')) {
+            button.style.display = 'flex'; // Affiche la bulle de discussion
+        } else {
+            button.style.display = 'none'; // Masque la bulle de discussion lorsque le chatbot est déployé
+        }
+    }
+
+    // Fonction pour envoyer un message
+    function sendMessage() {
+        const userInput = document.getElementById('user-message').value;
+        const messagesDiv = document.getElementById('chatbot-messages');
+        
+        // Crée un nouveau message pour l'utilisateur
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.classList.add('chatbot-message', 'user-message');
+        userMessageDiv.innerHTML = `<span>👤</span> <div class="chatbot-message-content">${userInput}</div>`;
+        
+        messagesDiv.appendChild(userMessageDiv);
+        
+        // Affiche la réponse du chatbot avec animation
+        displayTypingIndicator();
+        
+        setTimeout(() => {
+            const response = getChatbotResponse(userInput);
+            const lastMessage = messagesDiv.lastElementChild;
+            lastMessage.innerHTML = `<span>🤖</span> <div class="chatbot-message-content">${response}</div>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }, 1000); // Simule un délai de réponse
+        
+        // Efface le champ de saisie
+        document.getElementById('user-message').value = '';
+    }
+
+    // Fonction pour afficher l'indicateur de saisie avec animation
+    function displayTypingIndicator() {
+        const messagesDiv = document.getElementById('chatbot-messages');
+        
+        // Crée un nouveau message pour le chatbot
+        const typingMessageDiv = document.createElement('div');
+        typingMessageDiv.classList.add('chatbot-message', 'typing-message');
+        typingMessageDiv.innerHTML = `<span>🤖</span> <div class="typing-indicator"></div>`;
+        
+        messagesDiv.appendChild(typingMessageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    // Fonction pour obtenir la réponse du chatbot
+    function getChatbotResponse(userMessage) {
+        var messageLower = userMessage.toLowerCase();
+
+        if (messageLower.includes("Salut")) {
+            return"Bonjour! Comment puis-je vous aider ?";
+
+        } else if (messageLower.includes("Qui es tu ?")) {
+            return"Salama tompoko o😊. Tongasoa eto amin’ny Plateforme E-Gare. Aza misalasala manontany raha toa ka misy azo hanampiana tompoko.";
+        } else if (messageLower.includes("bonjour")) {
+            return"Ny anarako dia Tiketybot 😁. Robot andalam-pianarana ny tenako, ary vonona ny hanorolalana anao ny amin’ny fanjifana an’ireo tolotra misy eto amin’ny tambazotra E-Gare. Raha te hiresaka mivantana amin’ireo mpanolotsaina dia afaka miantso avy hatrany an’ity laharana ity +261 32 38 572 55.";
+        } else if (messageLower.includes("Merci")) {
+            return"Ianao no hisaorana tompoko. Mankasitraka ny amin’ny fahatokisana, ary aza misalasala fa eto aho vonona ny hanampy anao.";
+        } else if (messageLower.includes("Au revoir")) {
+            return"Mandrapihaona tompoko 😊.";
+        } else {
+            return" Mialatsiny tompoko, mbola tsy nampianarina ahy izany fanontaniana izany. Azafady fa tsy afaka manome valiny mahafa-po anao aho. Asaiko ianao hiantso ny laharana +261 32 38 572 55.";
+        }
+    }
+
+
+    // Écouteur d'événement pour le bouton du chatbot
+    document.getElementById('chatbot-button').addEventListener('click', toggleChatbot);
+    document.getElementById('chatbot-header').addEventListener('click', toggleChatbot);
+
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("noterModal");
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtn = document.querySelector(".close");
+    const form = document.getElementById("satisfaction-form");
+    const detailsSection = document.getElementById("details-section");
+    const selectedScoreDisplay = document.createElement('div'); // Pour afficher la note sélectionnée
+    selectedScoreDisplay.classList.add('selected-score');
+
+    // Ajouter le div dans la section emoji
+    document.querySelector('.emoji-section').appendChild(selectedScoreDisplay);
+
+    // Ouvrir la modale
+    openModalBtn.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+
+    // Fermer la modale
+    closeModalBtn.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Fermer la modale si on clique en dehors de celle-ci
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    // Gestion de la sélection des emojis
+    form.addEventListener("change", function (event) {
+        const selectedScore = form.querySelector('input[name="satisfaction"]:checked');
+        if (selectedScore) {
+            const scoreValue = parseInt(selectedScore.value);
+            selectedScoreDisplay.textContent = `Vous avez sélectionné la note : ${scoreValue}/10`; // Affiche la note sélectionnée
+
+            if (scoreValue <= 6) {
+                detailsSection.classList.remove("hidden");
+            } else {
+                detailsSection.classList.add("hidden");
+            }
+        }
+    });
+
+    // Soumission du formulaire
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Empêche l'envoi normal
+
+        alert("Nous vous remercions vivement de votre contribution pour ce retour ! Nous prenons en compte vos ressentis pour ameliorer notre service."); // Feedback rapide pour l'utilisateur
+
+        modal.style.display = "none"; // Fermer la modale après soumission
+
+        // Redirection vers la page principale avec l'apostrophe corrigée
+        window.location.href = "Test0'.html"; // Retour à la page principale
+    });
+});
+
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let slides = document.getElementsByClassName("slide");
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none"; // Masquer toutes les images
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1; } // Revenir à la première image
+        slides[slideIndex - 1].style.display = "block"; // Afficher l'image active
+        setTimeout(showSlides, 4000); // Changer d'image toutes les 4 secondes
+    }
+
+
+
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    const sectionA = document.getElementById('sectionA');
+    const sectionB = document.getElementById('sectionB');
+    const sectionA2 = document.getElementById('sectionA2');
+    const sectionB2 = document.getElementById('sectionB2');
+
+    // Afficher la section A lorsqu'on survole le coin bas gauche
+    slideshowContainer.addEventListener('mousemove', (event) => {
+        if (event.clientX < slideshowContainer.getBoundingClientRect().left + (slideshowContainer.offsetWidth / 2) &&
+            event.clientY > slideshowContainer.getBoundingClientRect().bottom - 10) {
+            sectionA.style.display = 'block';
+            sectionA2.style.display = 'none'; // Cacher sous-section A' par défaut
+        } else {
+            sectionA.style.display = 'none';
+            sectionA2.style.display = 'none';
+        }
+
+        // Afficher la section B lorsqu'on survole le coin bas droit
+        if (event.clientX > slideshowContainer.getBoundingClientRect().right - (slideshowContainer.offsetWidth / 2) &&
+            event.clientY > slideshowContainer.getBoundingClientRect().bottom - 10) {
+            sectionB.style.display = 'block';
+            sectionB2.style.display = 'none'; // Cacher sous-section B' par défaut
+        } else {
+            sectionB.style.display = 'none';
+            sectionB2.style.display = 'none';
+        }
+    });
+
+    // Afficher les sous-sections lors du survol
+    sectionA.addEventListener('mouseover', () => {
+        sectionA2.style.display = 'block'; // Afficher sous-section A'
+    });
+
+    sectionA.addEventListener('mouseleave', () => {
+        sectionA2.style.display = 'none'; // Cacher sous-section A'
+    });
+
+    sectionB.addEventListener('mouseover', () => {
+        sectionB2.style.display = 'block'; // Afficher sous-section B'
+    });
+
+    sectionB.addEventListener('mouseleave', () => {
+        sectionB2.style.display = 'none'; // Cacher sous-section B'
+    });
+    </script>
+</body>
+</html>

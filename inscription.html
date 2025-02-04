@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - E-Gare</title>
+    <link rel="stylesheet" href="inscription.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Inscription - E-Gare</h1>
+            <nav>
+                <ul>
+                    <li><a href="Test0.html">Accueil</a></li>
+                    <li><a href="en_savoir_plus.html">En savoir plus</a></li>
+                    <li><a href="mailto:rakotomalalajacky09@gmail.com">Nous contacter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="inscription">
+            <h2>Inscription</h2>
+            <form method="post" action="traitement_inscription.php">
+                <fieldset>
+                    <legend>Informations Personnelles</legend>
+
+                    <label for="civility">Civilité :</label>
+                    <select name="civility" id="civility" required>
+                        <option value="sir">M.</option>
+                        <option value="madam">Mme</option>
+                    </select><br>
+
+                    <label for="nom">Votre nom :</label>
+                    <input type="text" name="nom" id="nom" required><br>
+
+                    <label for="prenom">Votre prénom :</label>
+                    <input type="text" name="prenom" id="prenom" required><br>
+
+                    <label for="email">Votre adresse mail :</label>
+                    <input type="email" name="email" id="email" required><br>
+
+                    <div class="phone-container">
+                        <select name="phone-country-code" id="phone-country-code" required>
+                            <option value="+261" data-flag="images/flags/mg.png" selected>MDG (+261)</option>
+                            <option value="+33" data-flag="images/flags/fr.png">FRA (+33)</option>
+                            <option value="+49" data-flag="images/flags/de.png">DEU (+49)</option>
+                            <option value="+1" data-flag="images/flags/us.png">USA (+1)</option>
+                            <!-- Ajoutez d'autres options de codes pays avec les drapeaux -->
+                        </select>
+
+                        <label for="telephone" class="phone-label">Votre numéro de téléphone :</label>
+                        <input type="tel" name="telephone" id="telephone" required><br>
+                    </div>
+
+                    <label for="pass">Mot de passe :</label>
+                    <input type="password" name="pass" id="pass" required><br>
+
+                    <label for="pass-confirm">Confirmez le mot de passe :</label>
+                    <input type="password" name="pass-confirm" id="pass-confirm" required><br>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Consentement</legend>
+
+                    <label><input type="checkbox" name="newsletter" value="yes"> J'accepte de recevoir des publicités et des newsletters.</label><br>
+                    
+                    <label><input type="checkbox" name="conditions" value="accept" required> J'accepte les <a href="#">conditions générales</a>.</label><br>
+                    
+                    <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div><br>
+                    
+                    <input type="submit" value="S'inscrire" class="submit-button">
+                </fieldset>
+                
+                <fieldset class="social-login">
+                    <legend>Inscription avec</legend>
+                    <button type="button" class="google-button">S'inscrire avec Google</button>
+                </fieldset>
+            </form>
+            <p>Déjà inscrit ? <a href="connexion.html" class="link">Connectez-vous ici</a></p>
+        </section>
+    </main>
+
+    <footer>
+        <ul>
+            <li><a href="nos_conseils.html">Nos conseils</a></li>
+            <li><a href="#">Politique de confidentialité</a></li>
+            <li><a href="demande_de_collaboration.html">Demande de collaboration</a></li>
+        </ul>
+    </footer>
+
+    <!-- Include the reCAPTCHA API script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</body>
+</html>

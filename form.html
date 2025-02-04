@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Réservation et Inscription - E-Gare</title>
+    <link rel="stylesheet" href="form'.css">
+</head>
+<body>
+    <header>
+        <h1>Réservez avec E-Gare</h1>
+        <nav>
+            <ul>
+                <li><a href="Test.html">Accueil</a></li>
+                <li><a href="en_savoir_plus.html">En savoir plus</a></li>
+                <li><a href="mailto:rakotomalalajacky09@gmail.com">Nous contacter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Formulaire de Connexion -->
+        <section id="connexion">
+            <h2>Connexion</h2>
+            <form method="post" action="traitement.php">
+                <fieldset>
+                    <legend>Connexion</legend>
+                    <label for="pseudo">Identifiant :</label>
+                    <input type="text" name="pseudo" id="pseudo" placeholder="Ex: Solofo@RATSIMBA" size="45" maxlength="500" required><br>
+
+                    <label for="pass">Mot de passe :</label>
+                    <input type="password" name="pass" id="pass" required><br>
+
+                    <input type="submit" value="Se connecter">
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- Formulaire d'Inscription -->
+        <section id="inscription">
+            <h2>Inscription</h2>
+            <form method="post" action="traitement.php">
+                <fieldset>
+                    <legend>Inscription</legend>
+
+                    <label for="civility">Civilité :</label>
+                    <select name="civility" id="civility">
+                        <option value="sir">M.</option>
+                        <option value="madam">Mme</option>
+                    </select><br>
+
+                    <label for="nom">Votre nom :</label>
+                    <input type="text" name="nom" id="nom" required><br>
+
+                    <label for="prenom">Votre prénom :</label>
+                    <input type="text" name="prenom" id="prenom" required><br>
+
+                    <label for="email">Votre adresse mail :</label>
+                    <input type="email" name="email" id="email" required><br>
+
+                    <label for="telephone">Votre numéro de téléphone :</label>
+                    <input type="tel" name="telephone" id="telephone" required><br>
+
+                    <input type="submit" value="S'inscrire">
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- Formulaire de Réservation -->
+        <section id="reservation">
+            <h2>Réservation</h2>
+            <form method="post" action="traitement.php">
+                <fieldset>
+                    <legend>Réservation</legend>
+
+                    <label for="number">Effectif du voyageur :</label>
+                    <input type="range" name="number" id="number"><br>
+
+                    <label for="color">Choisissez votre couleur préférée :</label>
+                    <input type="color" name="color" id="color"><br>
+
+                    <label for="date">Choisissez votre date de départ :</label>
+                    <input type="date" name="date" id="date"><br>
+
+                    <label for="search">Choix de coopérative :</label>
+                    <input type="search" name="search" id="search"><br>
+
+                    <p>Votre choix de trajet :</p>
+                    <input type="checkbox" name="choix" id="aller-simple" value="aller-simple">
+                    <label for="aller-simple">Aller simple</label><br>
+                    <input type="checkbox" name="choix" id="aller-retour" value="aller-retour">
+                    <label for="aller-retour">Aller-retour</label><br>
+
+                    <p>Votre tranche d'âge :</p>
+                    <input type="radio" name="age" value="moins18" id="moins18">
+                    <label for="moins18">Moins de 18 ans</label><br>
+                    <input type="radio" name="age" value="18-25" id="18-25">
+                    <label for="18-25">Entre 18 et 25 ans</label><br>
+                    <input type="radio" name="age" value="25-35" id="25-35">
+                    <label for="25-35">Entre 25 et 35 ans</label><br>
+                    <input type="radio" name="age" value="plus35" id="plus35">
+                    <label for="plus35">Plus de 35 ans</label><br>
+
+                    <p>Province de départ :</p>
+                    <input type="radio" name="province" value="antananarivo" id="antananarivo">
+                    <label for="antananarivo">Antananarivo</label><br>
+                    <input type="radio" name="province" value="fianarantsoa" id="fianarantsoa">
+                    <label for="fianarantsoa">Fianarantsoa</label><br>
+                    <input type="radio" name="province" value="toamasina" id="toamasina">
+                    <label for="toamasina">Toamasina</label><br>
+                    <input type="radio" name="province" value="mahajanga" id="mahajanga">
+                    <label for="mahajanga">Mahajanga</label><br>
+                    <input type="radio" name="province" value="toliara" id="toliara">
+                    <label for="toliara">Toliara</label><br>
+                    <input type="radio" name="province" value="antsiranana" id="antsiranana">
+                    <label for="antsiranana">Antsiranana</label><br>
+
+                    <label for="region">Région de départ :</label>
+                    <select name="region" id="region">
+                        <option value="analamanga">Analamanga</option>
+                        <option value="bongolava">Bongolava</option>
+                        <option value="itasy">Itasy</option>
+                        <option value="vakin'ankaratra">Vakin'ankaratra</option>
+                        <option value="diana">Diana</option>
+                        <option value="sava">SAVA</option>
+                        <option value="amoron'i_mania">Amoron'i Mania</option>
+                        <option value="atsimo-atsinanana">Atsimo-Atsinanana</option>
+                        <option value="fitovinany">Fitovinany</option>
+                        <option value="haute_matsiatra">Haute Matsiatra</option>
+                        <option value="ihorombe">Ihorombe</option>
+                        <option value="vatovavy">Vatovavy</option>
+                        <option value="betsiboka">Betsiboka</option>
+                        <option value="boeny">Boeny</option>
+                        <option value="melaky">Melaky</option>
+                        <option value="sofia">Sofia</option>
+                        <option value="atsinanana">Atsinanana</option>
+                        <option value="alaotra_mangoro">Alaotra Mangoro</option>
+                        <option value="analanjirofo">Analanjirofo</option>
+                        <option value="androy">Androy</option>
+                        <option value="anosy">Anosy</option>
+                        <option value="atsimo-andrefana">Atsimo-Andrefana</option>
+                        <option value="menabe">Menabe</option>
+                    </select><br>
+
+                    <input type="submit" value="Soumettre">
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- Section média -->
+        <section id="media">
+            <p>Pour vous détendre, écoutez cette chanson :</p>
+            <audio src="regina_spector_on_the_radio.mp3" controls></audio>
+
+            <p>Voici une courte vidéo pour vous :</p>
+            <video src="le_sourire_au_telephone.mp4" controls poster="sourire.png" width="200"></video>
+        </section>
+    </main>
+
+    <footer>
+        <ul>
+            <li><a href="nos_conseils.html">Nos conseils</a></li>
+            <li><a href="#">Politique de confidentialité</a></li>
+            <li><a href="demande_de_collaboration.html">Demande de collaboration</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

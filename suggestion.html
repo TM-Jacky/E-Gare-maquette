@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suggestions - Tickets Mada</title>
+    <link rel="stylesheet" href="suggestion.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1 class="site-title">E-Gare</h1>
+            <nav>
+                <ul>
+                    <li><a href="Test0'.html">Accueil</a></li>
+                    <li><a href="en_savoir_plus.html">En savoir plus</a></li>
+                    <li><a href="mailto:rakotomalalajacky09@gmail.com">Nous contacter</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="suggestion">
+            <h2 class="section-title">Partagez vos Suggestions</h2>
+            <div class="section-content">
+                <p>Chez <strong>E-Gare</strong>, nous nous engageons à offrir la meilleure expérience possible. Votre avis est crucial pour nous aider à améliorer nos services et répondre au mieux à vos besoins.</p>
+                <p><strong>Pourquoi vos suggestions sont-elles importantes ?</strong></p>
+                <p>En partageant vos idées, vous contribuez directement à la qualité de nos services. Nous croyons que chaque retour est une opportunité d'amélioration, et nous nous efforçons de mettre en œuvre vos recommandations pour rendre votre expérience encore meilleure.</p>
+                <p>Nous vous encourageons donc à nous faire part de toutes vos suggestions, qu'elles concernent nos services, notre site web, ou tout autre aspect de notre entreprise. Chaque suggestion est précieuse et nous aidera à progresser.</p>
+                
+                <form method="post" action="traitement_suggestion.php">
+                    <fieldset>
+                        <legend>Envoyez-nous vos suggestions</legend>
+
+                        <label for="name">Votre nom :</label>
+                        <input type="text" name="name" id="name" required><br>
+
+                        <label for="email">Votre adresse mail :</label>
+                        <input type="email" name="email" id="email" required><br>
+
+                        <label for="suggestion">Votre suggestion :</label>
+                        <textarea name="suggestion" id="suggestion" rows="5" required></textarea><br>
+
+                        <input type="submit" value="Envoyer">
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <ul>
+            <li><a href="#">Nos conseils</a></li>
+            <li><a href="#">Politique de confidentialité</a></li>
+            <li><a href="demande_de_collaboration.html">Demande de collaboration</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

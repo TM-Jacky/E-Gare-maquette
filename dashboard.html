@@ -1,0 +1,838 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Espace Client - Dashboard</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: rgba(255, 255, 255, 0.9); /* Blanc transparent */
+      color: #333; /* Texte noir */
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ombre portée pour effet 3D */
+      border-bottom: 2px solid #e0f2f1; /* Bordure verte très claire pour rappeler les couleurs du drapeau */
+      position: relative;
+      z-index: 1; /* Assure que le header reste au-dessus du contenu */
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    .header .header-right {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+    }
+    .header .header-right div {
+      margin-left: 20px;
+      display: flex;
+      align-items: center;
+    }
+    .header .header-right div i {
+      font-size: 24px;
+      margin-right: 5px;
+    }
+    .header .header-right div a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+    .header .header-right div a:hover {
+      color: #f44336; /* Changement de couleur au survol */
+    }
+    .header .header-right div a span {
+      display: block;
+      font-size: 14px;
+    }
+    .welcome-section {
+      background-color: rgba(255, 255, 255, 0.8); /* Blanc transparent */
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Ombre portée pour effet 3D */
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+    }
+    .welcome-section h2 {
+      font-size: 26px; /* Taille de police plus grande pour le texte */
+      margin: 0;
+      color: #333; /* Texte noir */
+    }
+    .welcome-section .user-name {
+      font-size: 28px; /* Taille de police plus grande pour le prénom */
+      font-weight: bold;
+      color: #4caf50; /* Vert pour le prénom */
+    }
+    .welcome-section .user-surname {
+      font-size: 28px; /* Taille de police plus grande pour le nom */
+      font-weight: bold;
+      color: #f44336; /* Rouge pour le nom de famille */
+    }
+    .sections {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+    .section-card {
+      background: linear-gradient(145deg, #ffffff, #e0f2f1); /* Dégradé blanc et vert clair */
+      width: 30%;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: 2px solid #e0f2f1; /* Bordure verte très claire */
+    }
+    .section-card:hover {
+      transform: translateY(-5px);
+      background: linear-gradient(145deg, #ffffff, #e0f2f1, #f44336); /* Dégradé incluant le rouge au survol */
+      border-color: #f44336; /* Bordure rouge au survol */
+    }
+    .section-card i {
+      font-size: 40px;
+      color: #f44336; /* Icônes rouges pour contraster avec le dégradé */
+      margin-bottom: 10px;
+    }
+    .section-card h3 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+    .section-card p {
+      font-size: 14px;
+      color: #777;
+    }
+        /* Style pour le bouton de chatbot (bulle de discussion) */
+        .chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        /* Tooltip affiché lors du survol */
+        .chatbot-tooltip {
+            display: none;
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background-color: #007bff;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        /* Afficher le tooltip au survol */
+        .chatbot-button:hover .chatbot-tooltip {
+            display: block;
+        }
+
+        /* Style pour le chatbot */
+        .chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            height: 400px; /* Hauteur initiale */
+        }
+
+        .chatbot.retracted {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .chatbot-header::before {
+            content: "🤖";
+            font-size: 20px;
+            margin-right: 10px;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 300px;
+            display: block;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .chatbot-input button {
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Style pour les messages du chatbot et de l'utilisateur */
+        .chatbot-message {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .chatbot-message span {
+            margin-right: 10px;
+        }
+
+        .chatbot-message .user-message {
+            text-align: right;
+        }
+
+        .chatbot-message .chatbot-message-content {
+            background-color: #f1f1f1;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+
+        .chatbot-message .user-message .chatbot-message-content {
+            background-color: #007bff;
+            color: white;
+            align-self: flex-end;
+        }
+
+        /* Animation des trois points de suspension */
+        .typing-indicator {
+            display: inline-block;
+            font-size: 16px;
+            position: relative;
+            vertical-align: middle;
+        }
+
+        .typing-indicator::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 60px;
+            height: 16px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+            animation: typing 1.5s infinite ease-in-out;
+        }
+
+        @keyframes typing {
+            0% {
+                width: 0;
+                opacity: 0;
+            }
+            50% {
+                width: 60px;
+                opacity: 1;
+            }
+            100% {
+                width: 0;
+                opacity: 0;
+            }
+        }
+
+        /* Style pour les messages en cours de saisie */
+        .typing-message {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .typing-message span {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .typing-message .typing-indicator {
+            margin-left: 10px;
+        }
+
+/* Style pour le footer */
+footer {
+    background-color: rgba(255, 255, 255, 0.8); /* Blanc avec transparence */
+    padding: 20px; /* Ajustez la taille selon vos besoins */
+    border-top: 1px solid #ddd; /* Optionnel : ajoute une bordure en haut du footer */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optionnel : ajoute une ombre légère */
+}
+
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* Style pour les colonnes du footer */
+.footer-columns {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px; /* Espacement entre les colonnes et le reste du contenu */
+}
+/* Style pour chaque colonne du footer */
+.footer-column {
+    flex: 1;
+    margin: 10px;
+    padding: 10px;
+}
+
+/* Style pour les titres des colonnes */
+.footer-column h3 {
+    color: #333; /* Couleur du texte des titres en noir */
+    margin-bottom: 10px;
+}
+
+/* Style pour les listes dans les colonnes */
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+/* Style pour les éléments de la liste */
+.footer-column ul li {
+    margin-bottom: 10px; /* Espacement entre les éléments de la liste */
+}
+
+/* Style pour les liens dans les listes */
+.footer-column ul li a {
+    color: #333; /* Couleur du texte des liens en noir */
+    text-decoration: none; /* Supprime le soulignement des liens */
+    font-size: 16px;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline; /* Souligne les liens au survol */
+}
+
+/* Style pour les images dans le footer */
+.footer-app .store-img {
+    width: 150px;
+    margin: 5px;
+}
+
+.footer-social .social-icon {
+    width: 30px;
+    margin: 5px;
+}
+
+/* Style de la modale */
+.modal {
+    display: none; /* Cacher par défaut */
+    position: fixed;
+    z-index: 999; /* S'assurer qu'elle est au-dessus du contenu */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Arrière-plan semi-transparent */
+}
+
+/* Contenu de la modale */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%; /* Taille de la modale */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: fadeIn 0.5s;
+}
+
+/* Animation d'apparition */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Bouton de fermeture */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #333;
+}
+
+.close:hover {
+    color: red;
+}
+
+/* Section des emojis */
+.emoji-section label {
+    font-size: 24px;
+    padding: 0 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.emoji-section label:hover {
+    transform: scale(1.2); /* Effet d'agrandissement au survol */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Style du formulaire dynamique */
+textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* Emoji section style with hover effect */
+.emoji-section label {
+    font-size: 24px;
+    padding: 0 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: inline-block;
+    position: relative;
+}
+
+.emoji-section label:hover {
+    transform: scale(1.2); /* Animation d'agrandissement au survol */
+}
+
+/* Affichage de la note sélectionnée */
+.selected-score {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+    text-align: center;
+}
+
+    </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <!-- Header -->
+  <div class="header">
+    <h1>Bienvenue sur votre espace client</h1>
+    <div class="header-right">
+      <!-- Aide & Contact -->
+      <div>
+        <i class="fas fa-question-circle"></i>
+        <a href="#">Aide & contact</a>
+      </div>
+      <!-- Nom de l'utilisateur -->
+      <div>
+        <i class="fas fa-user"></i>
+        <a href="espace_client.html">Jacky RAKOTOMALALA</a>
+      </div>
+      <!-- Déconnexion -->
+      <div>
+        <i class="fas fa-sign-out-alt"></i>
+        <a href="deconnexion.html">Déconnexion</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message d'accueil personnalisé avec effet 3D -->
+  <div class="container">
+    <div class="welcome-banner">
+      <h2>
+        Bonjour, <span class="user-name">Jacky</span> <span class="user-surname">RAKOTOMALALA</span> !</br> Nous sommes ravis de vous revoir. Explorez votre espace client ci-dessous.
+      </h2>
+    
+
+    <!-- Sections interactives -->
+    <div class="sections">
+      <!-- Section Réservation -->
+      <div class="section-card" onclick="window.location.href='#';">
+        <i class="fas fa-ticket-alt"></i>
+        <h3>Réserver</h3>
+        <p>Réservez votre prochain voyage rapidement et facilement.</p>
+      </div>
+
+      <!-- Section Carte de fidélité -->
+      <div class="section-card" onclick="window.location.href='#';">
+        <i class="fas fa-id-card"></i>
+        <h3>Carte de fidélité</h3>
+        <p>Créer ou rattacher votre carte de fidélité pour plus d'avantages.</p>
+      </div>
+
+      <!-- Section Nos offres du moment -->
+      <div class="section-card" onclick="window.location.href='#';">
+        <i class="fas fa-gift"></i>
+        <h3>Nos offres du moment</h3>
+        <p>Découvrez les meilleures offres réservées pour vous.</p>
+      </div>
+
+      <!-- Section Historique des réservations -->
+      <div class="section-card" onclick="window.location.href='historique_de_reservation.html';">
+        <i class="fas fa-history"></i>
+        <h3>Mes historiques de réservation</h3>
+        <p>Consultez toutes vos réservations passées et futures.</p>
+      </div>
+
+      <!-- Section Simulateur de voyage -->
+      <div class="section-card" onclick="window.location.href='#';">
+        <i class="fas fa-calculator"></i>
+        <h3>Simulateur de voyage</h3>
+        <p>Estimez le prix de votre prochain voyage avec notre simulateur.</p>
+      </div>
+    </div>
+  </div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <!-- Première ligne avec colonnes -->
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h3>Nous connaitre</h3>
+                <ul>
+                    <li><a href="en_savoir_plus.html">À propos de nous</a></li>
+                    <li><a href="responsabilite_sociale_et_environnementale.html">Responsabilité Sociale et Environnementale</a></li>
+                    <li><a href="demande_de_collaboration.html">Demande de collaboration</a></li>
+                    <li><a id="openModalBtn">Noter notre prestation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Nos idées de voyage</h3>
+                <ul>
+                    <li><a href="nos_destinations.html">Nos destinations</a></li>
+                    <li><a href="nos_bons_plans.html">Nos bons plans</a></li>
+                    <li><a href="recommandations.html">Recommandations</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Nos services</h3>
+                <ul>
+                    <li><a href="conditions_generales.html">Conditions Générales de Vente</a></li>
+                    <li><a href="faq.html">Foire aux Questions</a></li>
+                    <li><a href="#" id="openPopup">Service de réclamation</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Deuxième ligne avec images et réseaux sociaux -->
+        <div class="footer-extra">
+            <!-- Application Section -->
+            <div class="footer-app">
+                <h3>L'application Tickets Mada</h3>
+                <a href="https://apps.apple.com" target="_blank"><img src="Images/image_app_store.png" alt="App Store" class="store-img"></a>
+                <a href="https://play.google.com" target="_blank"><img src="Images/image_google_play.png" alt="Google Play" class="store-img"></a>
+            </div>
+
+            <!-- Réseaux Sociaux Section -->
+            <div class="footer-social">
+                <h3>Restez informé(e)</h3>
+                <p>Réseaux sociaux</p>
+                <div class="social-icons">
+                    <a href="https://youtube.com" target="_blank"><img src="Images/youtube_icon.png" alt="YouTube" class="social-icon"></a>
+                    <a href="https://x.com" target="_blank"><img src="Images/x_icon.png" alt="X" class="social-icon"></a>
+                    <a href="https://facebook.com" target="_blank"><img src="Images/facebook_icon.png" alt="Facebook" class="social-icon"></a>
+                    <a href="https://instagram.com" target="_blank"><img src="Images/instagram_icon.png" alt="Instagram" class="social-icon"></a>
+                    <a href="https://wa.me" target="_blank"><img src="Images/whatsapp_icon.png" alt="WhatsApp" class="social-icon"></a>
+                    <a href="https://tiktok.com" target="_blank"><img src="Images/tiktok_icon.png" alt="TikTok" class="social-icon"></a>
+                    <a href="https://linkedin.com" target="_blank"><img src="Images/linkedin_icon.png" alt="LinkedIn" class="social-icon"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Fenêtre modale -->
+<div id="noterModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <!-- Contenu de noter_notre_prestation.html ici -->
+        <h2 style="color:red; text-align:center;">Noter notre prestation</h2>
+        <form id="satisfaction-form">
+            <!-- Section pour les emojis -->
+            <div class="emoji-section" style="text-align:center; margin-bottom:20px;">
+                <label><input type="radio" name="satisfaction" value="1"><span>😠</span></label>
+                <label><input type="radio" name="satisfaction" value="2"><span>😕</span></label>
+                <label><input type="radio" name="satisfaction" value="3"><span>😐</span></label>
+                <label><input type="radio" name="satisfaction" value="4"><span>😶</span></label>
+                <label><input type="radio" name="satisfaction" value="5"><span>😕</span></label>
+                <label><input type="radio" name="satisfaction" value="6"><span>😐</span></label>
+                <label><input type="radio" name="satisfaction" value="7"><span>🙂</span></label>
+                <label><input type="radio" name="satisfaction" value="8"><span>😊</span></label>
+                <label><input type="radio" name="satisfaction" value="9"><span>😃</span></label>
+                <label><input type="radio" name="satisfaction" value="10"><span>😁</span></label>
+            </div>
+
+            <!-- Section dynamique si la note est <= 6 -->
+            <div id="details-section" class="hidden" style="text-align:center;">
+                <h3>Raison de votre insatisfaction :</h3>
+                <select name="reason">
+                    <option value="reservations">Prise en compte des réservations</option>
+                    <option value="payment">Service de paiement</option>
+                    <option value="complaints">Traitement des réclamations</option>
+                    <option value="other">Autres</option>
+                </select>
+                <textarea name="details" placeholder="Veuillez détailler votre insatisfaction..."></textarea>
+            </div>
+
+            <!-- Bouton pour soumettre avec l'effet fusée -->
+            <button type="submit" class="submit-btn" style="display:block;margin:20px auto;">🚀 Envoyer</button>
+        </form>
+    </div>
+</div>
+
+<!-- JS pour le pop-up -->
+<script src="footer.js"></script>
+
+<!-- Chatbot Button (Bulle de discussion) -->
+<div id="chatbot-button" class="chatbot-button">
+    <div id="chatbot-tooltip" class="chatbot-tooltip">Discuter avec 🤖 Tiketybot</div>
+</div>
+
+<!-- Chatbot Section -->
+<div id="chatbot" class="chatbot retracted">
+    <div id="chatbot-header" class="chatbot-header">
+        Tiketybot
+    </div>
+    <div id="chatbot-messages" class="chatbot-messages"></div>
+    <div id="chatbot-input" class="chatbot-input">
+        <input type="text" id="user-message" placeholder="Tapez votre message...">
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
+</div>
+
+<script>
+    // Fonction pour afficher ou masquer le chatbot
+    function toggleChatbot() {
+        const chatbot = document.getElementById('chatbot');
+        chatbot.classList.toggle('retracted');
+        const button = document.getElementById('chatbot-button');
+        if (chatbot.classList.contains('retracted')) {
+            button.style.display = 'flex'; // Affiche la bulle de discussion
+        } else {
+            button.style.display = 'none'; // Masque la bulle de discussion lorsque le chatbot est déployé
+        }
+    }
+
+    // Fonction pour envoyer un message
+    function sendMessage() {
+        const userInput = document.getElementById('user-message').value;
+        const messagesDiv = document.getElementById('chatbot-messages');
+        
+        // Crée un nouveau message pour l'utilisateur
+        const userMessageDiv = document.createElement('div');
+        userMessageDiv.classList.add('chatbot-message', 'user-message');
+        userMessageDiv.innerHTML = `<span>👤</span> <div class="chatbot-message-content">${userInput}</div>`;
+        
+        messagesDiv.appendChild(userMessageDiv);
+        
+        // Affiche la réponse du chatbot avec animation
+        displayTypingIndicator();
+        
+        setTimeout(() => {
+            const response = getChatbotResponse(userInput);
+            const lastMessage = messagesDiv.lastElementChild;
+            lastMessage.innerHTML = `<span>🤖</span> <div class="chatbot-message-content">${response}</div>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }, 1000); // Simule un délai de réponse
+        
+        // Efface le champ de saisie
+        document.getElementById('user-message').value = '';
+    }
+
+    // Fonction pour afficher l'indicateur de saisie avec animation
+    function displayTypingIndicator() {
+        const messagesDiv = document.getElementById('chatbot-messages');
+        
+        // Crée un nouveau message pour le chatbot
+        const typingMessageDiv = document.createElement('div');
+        typingMessageDiv.classList.add('chatbot-message', 'typing-message');
+        typingMessageDiv.innerHTML = `<span>🤖</span> <div class="typing-indicator"></div>`;
+        
+        messagesDiv.appendChild(typingMessageDiv);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    // Fonction pour obtenir la réponse du chatbot
+    function getChatbotResponse(userMessage) {
+        var messageLower = userMessage.toLowerCase();
+
+        if (messageLower.includes("bonjour")) {
+            return "Bonjour! Comment puis-je vous aider ?";
+        } else if (messageLower.includes("prix")) {
+            return "Les prix dépendent de la destination. Pour quelle ville souhaitez-vous obtenir des informations ?";
+        } else if (messageLower.includes("reservation")) {
+            return "Vous pouvez réserver vos billets sur notre page de réservation en ligne.";
+        } else if (messageLower.includes("horaire")) {
+            return "Les horaires de nos bus sont disponibles sur la page des horaires. Souhaitez-vous le lien ?";
+        } else if (messageLower.includes("contact")) {
+            return "Vous pouvez nous contacter par email à info@ticketsmada.com ou par téléphone au +261 34 000 0000.";
+        } else if (messageLower.includes("au revoir")) {
+            return "Au revoir ! Revenez si vous avez d'autres questions.";
+        } else {
+            return "Je suis désolé, je ne comprends pas votre demande.";
+        }
+    }
+
+    // Écouteur d'événement pour le bouton du chatbot
+    document.getElementById('chatbot-button').addEventListener('click', toggleChatbot);
+    document.getElementById('chatbot-header').addEventListener('click', toggleChatbot);
+
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("noterModal");
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtn = document.querySelector(".close");
+    const form = document.getElementById("satisfaction-form");
+    const detailsSection = document.getElementById("details-section");
+    const selectedScoreDisplay = document.createElement('div'); // Pour afficher la note sélectionnée
+    selectedScoreDisplay.classList.add('selected-score');
+
+    // Ajouter le div dans la section emoji
+    document.querySelector('.emoji-section').appendChild(selectedScoreDisplay);
+
+    // Ouvrir la modale
+    openModalBtn.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+
+    // Fermer la modale
+    closeModalBtn.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Fermer la modale si on clique en dehors de celle-ci
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    // Gestion de la sélection des emojis
+    form.addEventListener("change", function (event) {
+        const selectedScore = form.querySelector('input[name="satisfaction"]:checked');
+        if (selectedScore) {
+            const scoreValue = parseInt(selectedScore.value);
+            selectedScoreDisplay.textContent = `Vous avez sélectionné la note : ${scoreValue}/10`; // Affiche la note sélectionnée
+
+            if (scoreValue <= 6) {
+                detailsSection.classList.remove("hidden");
+            } else {
+                detailsSection.classList.add("hidden");
+            }
+        }
+    });
+
+    // Soumission du formulaire
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Empêche l'envoi normal
+
+        alert("Nous vous remercions vivement de votre contribution pour ce retour ! Nous prenons en compte vos ressentis pour ameliorer notre service."); // Feedback rapide pour l'utilisateur
+
+        modal.style.display = "none"; // Fermer la modale après soumission
+
+        // Redirection vers la page principale avec l'apostrophe corrigée
+        window.location.href = "Test0'.html"; // Retour à la page principale
+    });
+});
+
+let slideIndex = 0;
+
+function showSlides() {
+    let slides = document.getElementsByClassName("slide");
+    let dots = document.getElementsByClassName("dot");
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1 }    
+    for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";  
+    dots[slideIndex - 1].className += " active";
+    setTimeout(showSlides, 2000); // Change slide every 2 seconds
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    showSlides(); // Initial call
+});
+    </script>
+</body>
+</html>

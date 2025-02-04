@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espace Client - E-Gare</title>
+    <link rel="stylesheet" href="test1'.css">
+    <link rel="stylesheet" href="deconnexion.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <h1>Espace Client - E-Gare</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="en_savoir_plus.html">En savoir plus</a></li>
+                <li><a href="mailto:rakotomalalajacky09@gmail.com">Nous contacter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="espace_client">
+            <?php
+            session_start();
+            if (!isset($_SESSION['user_id'])) {
+                header('Location: connexion.html');
+                exit;
+            }
+            echo '<h2>Bienvenue, ' . htmlspecialchars($_SESSION['user_name']) . '</h2>';
+            ?>
+            <p>Voici votre espace client. Vous pouvez voir et modifier vos informations personnelles ici.</p>
+
+            <h3>Vos informations :</h3>
+            <?php
+            // Connexion à la base de données
+            $pdo = new PDO('mysql:host=localhost;dbname=nom_de_la_base', 'utilisateur', 'mot_de_passe');
+            $user_id = $_SESSION['user_id'];
+            
+            // Rechercher l'utilisateur dans la base de données
+            $sql = 'SELECT * FROM utilisateurs WHERE id = ?';
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$user_id]);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // Afficher les informations de l'utilisateur
+            echo '<p>Nom : ' . htmlspecialchars($user['nom']) . '</p>';
+            echo '<p>Prénom : ' . htmlspecialchars($user['prenom']) . '</p>';
+            echo '<p>Email : ' . htmlspecialchars($user['email']) . '</p>';
+            echo '<p>Téléphone : ' . htmlspecialchars($user['telephone']) . '</p>';
+            ?>
+            <a href="deconnexion.php">Se déconnecter</a>
+        </section>
+    </main>
+
+    <footer>
+        <ul>
+            <li><a href="nos_conseils.html">Nos conseils</a></li>
+            <li><a href="#">Politique de confidentialité</a></li>
+            <li><a href="demande_de_collaboration.html">Demande de collaboration</a></li>
+        </ul>
+    </footer>
+</body>
+</html>

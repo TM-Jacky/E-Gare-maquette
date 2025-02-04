@@ -1,0 +1,210 @@
+/* Styles globaux */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('Images/ravinala.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #333;
+}
+
+/* Header */
+header {
+    background: transparent;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: none;
+    z-index: 1000;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.1em;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content */
+main {
+    padding: 80px 20px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Inscription Section */
+#inscription {
+    background: rgba(255, 255, 255, 0.8); /* Background semi-transparent */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#inscription h2 {
+    text-align: center;
+    color: #e53935;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+fieldset {
+    border: none;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fafafa;
+    border-radius: 8px;
+}
+
+legend {
+    font-weight: bold;
+    color: #333;
+    padding: 0 10px;
+}
+
+label {
+    margin: 10px 0 5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"],
+select {
+    width: calc(100% - 22px); /* Adjust for padding */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background: linear-gradient(to right, #e53935, #ff7043);
+    color: #fff;
+    border: none;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background: linear-gradient(to right, #ff7043, #e53935);
+    transform: scale(1.05);
+}
+
+.google-button {
+    background: #db4437;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+}
+
+.google-button:hover {
+    background: #c1351d;
+    transform: scale(1.05);
+}
+
+a.link {
+    color: #e53935;
+}
+
+a.link:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+footer ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer ul li a:hover {
+    text-decoration: underline;
+}
+
+/* reCAPTCHA styles */
+.g-recaptcha {
+    margin: 20px 0;
+}
+
+/* Phone Container */
+.phone-container {
+    display: flex;
+    align-items: center;
+}
+
+select#phone-country-code {
+    width: auto;
+    padding: 10px;
+    margin-right: 10px;
+    background-size: 20px;
+    background-position: center left;
+    background-repeat: no-repeat;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    appearance: none;
+}
+
+.phone-label {
+    margin: 0;
+}

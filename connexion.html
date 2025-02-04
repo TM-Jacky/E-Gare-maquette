@@ -1,0 +1,481 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - E-Gare</title>
+    <link rel="stylesheet" href="test1'.css">
+    <link rel="stylesheet" href="connexion.css"> <!-- Feuille CSS spécifique -->
+<style>
+/* Style pour le footer */
+
+footer {
+    margin-top: 20px; /* Ajoutez un espace entre les sections dynamiques et le footer */
+    padding: 20px 0; /* Ajouter un peu d'espace à l'intérieur du footer */
+    background-color: #f1f1f1; /* Exemple de couleur de fond pour le footer */
+}
+footer {
+    background-color: rgba(255, 255, 255, 0.8); /* Blanc avec transparence */
+    padding: 20px; /* Ajustez la taille selon vos besoins */
+    border-top: 1px solid #ddd; /* Optionnel : ajoute une bordure en haut du footer */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optionnel : ajoute une ombre légère */
+}
+
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+/* Style pour les colonnes du footer */
+.footer-columns {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px; /* Espacement entre les colonnes et le reste du contenu */
+}
+/* Style pour chaque colonne du footer */
+.footer-column {
+    flex: 1;
+    margin: 10px;
+    padding: 10px;
+}
+
+/* Style pour les titres des colonnes */
+.footer-column h3 {
+    color: #333; /* Couleur du texte des titres en noir */
+    margin-bottom: 10px;
+}
+
+/* Style pour les listes dans les colonnes */
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+
+/* Style pour les éléments de la liste */
+.footer-column ul li {
+    margin-bottom: 10px; /* Espacement entre les éléments de la liste */
+}
+
+/* Style pour les liens dans les listes */
+.footer-column ul li a {
+    color: #333; /* Couleur du texte des liens en noir */
+    text-decoration: none; /* Supprime le soulignement des liens */
+    font-size: 16px;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline; /* Souligne les liens au survol */
+}
+
+/* Style pour les images dans le footer */
+.footer-app .store-img {
+    width: 150px;
+    margin: 5px;
+}
+
+.footer-social .social-icon {
+    width: 30px;
+    margin: 5px;
+}
+
+/* Style de la modale */
+.modal {
+    display: none; /* Cacher par défaut */
+    position: fixed;
+    z-index: 999; /* S'assurer qu'elle est au-dessus du contenu */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5); /* Arrière-plan semi-transparent */
+}
+
+/* Contenu de la modale */
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%; /* Taille de la modale */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    animation: fadeIn 0.5s;
+}
+
+/* Animation d'apparition */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Bouton de fermeture */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #333;
+}
+
+.close:hover {
+    color: red;
+}
+
+/* Section des emojis */
+.emoji-section label {
+    font-size: 24px;
+    padding: 0 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.emoji-section label:hover {
+    transform: scale(1.2); /* Effet d'agrandissement au survol */
+}
+
+.hidden {
+    display: none;
+}
+
+/* Style du formulaire dynamique */
+textarea, select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* Emoji section style with hover effect */
+.emoji-section label {
+    font-size: 24px;
+    padding: 0 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: inline-block;
+    position: relative;
+}
+
+.emoji-section label:hover {
+    transform: scale(1.2); /* Animation d'agrandissement au survol */
+}
+
+/* Affichage de la note sélectionnée */
+.selected-score {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.dynamic-section {
+    display: none; /* Cacher les sections par défaut */
+    width: 48%; /* Largeur de presque la moitié de la section du diaporama */
+    margin: 10px auto; /* Centrer horizontalement */
+    padding: 10px;
+    border-radius: 10px; /* Bordures arrondies */
+    color: black; /* Texte noir pour lisibilité */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9); /* Fond blanc transparent */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Ombres pour effet 3D */
+    position: relative; /* Nécessaire pour utiliser z-index */
+    z-index: 10; /* Assurez-vous que la section est au-dessus du footer */
+}
+
+/* Positionnement pour section A */
+#sectionA {
+    position: absolute;
+    bottom: 10%; /* Espacement depuis le bas du diaporama */
+    left: 5%; /* Position à gauche */
+}
+
+/* Positionnement pour section B */
+#sectionB {
+    position: absolute;
+    bottom: 10%; /* Espacement depuis le bas du diaporama */
+    right: 5%; /* Position à droite */
+}
+
+/* Styles pour sous-sections A' et B' */
+#sectionA2,
+#sectionB2 {
+    display: none; /* Cacher par défaut */
+    width: 48%; /* Largeur de presque la moitié de la section du diaporama */
+    margin: 0 auto; /* Centrer horizontalement */
+    padding: 10px;
+    border-radius: 10px; /* Bordures arrondies */
+    color: black; /* Texte noir pour lisibilité */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9); /* Fond blanc légèrement transparent */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: absolute; /* Positionnement absolu */
+    z-index: 10; /* S'assurer qu'elles sont au-dessus */
+}
+
+/* Positionnement pour la sous-section A' */
+#sectionA2 {
+    top: 100%; /* Juste en dessous de la section A */
+    left: 5%; /* Alignement à gauche */
+}
+
+/* Positionnement pour la sous-section B' */
+#sectionB2 {
+    top: 100%; /* Juste en dessous de la section B */
+    right: 5%; /* Alignement à droite */
+}
+
+/* Footer */
+footer {
+    margin-top: 40px; /* Ajustez selon vos besoins */
+    padding: 20px 0; /* Ajouter un peu d'espace à l'intérieur du footer */
+    background-color: #f1f1f1; /* Exemple de couleur de fond pour le footer */
+}
+
+</style>
+
+</head>
+<body id="connexion-page">
+    <header>
+        <h1>Connexion - Tickets Mada</h1>
+        <nav>
+            <ul>
+                <li><a href="Test.html">Accueil</a></li>
+                <li><a href="en_savoir_plus.html">En savoir plus</a></li>
+                <li><a href="mailto:rakotomalalajacky09@gmail.com">Nous contacter</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="connexion">
+            <h2>Connexion</h2>
+            <form method="post" action="traitement_connexion.php">
+                <fieldset>
+                    <legend>Connexion</legend>
+
+                    <label for="email">Votre adresse mail :</label>
+                    <input type="email" name="email" id="email" required><br>
+
+                    <label for="pass">Mot de passe :</label>
+                    <input type="password" name="pass" id="pass" required><br>
+
+                    <input type="submit" value="Se connecter">
+                </fieldset>
+            </form>
+            <p class="forgot-password"><a href="recuperation_mot_de_passe.html">Mot de passe oublié ?</a></p>
+            <p class="signup-link">Pas encore inscrit ? <a href="inscription.html">Inscrivez-vous ici</a></p>
+        </section>
+    </main>
+
+
+<!-- Footer -->
+<footer>
+    <div class="footer-container">
+        <!-- Première ligne avec colonnes -->
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h3>Nous connaitre</h3>
+                <ul>
+                    <li><a href="en_savoir_plus.html">À propos de nous</a></li>
+                    <li><a href="nos_conseils.html">Nos conseils</a></li>
+                    <li><a href="responsabilite_sociale_et_environnementale.html">Responsabilité Sociale et Environnementale</a></li>
+                    <li><a href="demande_de_collaboration.html">Demande de collaboration</a></li>
+                    <li><a id="openModalBtn">Noter notre prestation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Nos idées de voyage</h3>
+                <ul>
+                    <li><a href="nos_destinations.html">Nos destinations</a></li>
+                    <li><a href="nos_bons_plans.html">Nos bons plans</a></li>
+                    <li><a href="recommandations.html">Recommandations</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Nos services</h3>
+                <ul>
+                    <li><a href="conditions_generales.html">Conditions Générales de Vente</a></li>
+                    <li><a href="faq.html">Foire aux Questions</a></li>
+                    <li><a href="#" id="openPopup">Service de réclamation</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Deuxième ligne avec images et réseaux sociaux -->
+        <div class="footer-extra">
+            <!-- Application Section -->
+            <div class="footer-app">
+                <h3>L'application Tickets Mada</h3>
+                <a href="https://apps.apple.com" target="_blank"><img src="Images/image_app_store.png" alt="App Store" class="store-img"></a>
+                <a href="https://play.google.com" target="_blank"><img src="Images/image_google_play.png" alt="Google Play" class="store-img"></a>
+            </div>
+
+            <!-- Réseaux Sociaux Section -->
+            <div class="footer-social">
+                <h3>Restez informé(e)</h3>
+                <p>Réseaux sociaux</p>
+                <div class="social-icons">
+                    <a href="https://youtube.com" target="_blank"><img src="Images/youtube_icon.png" alt="YouTube" class="social-icon"></a>
+                    <a href="https://x.com" target="_blank"><img src="Images/x_icon.png" alt="X" class="social-icon"></a>
+                    <a href="https://facebook.com" target="_blank"><img src="Images/facebook_icon.png" alt="Facebook" class="social-icon"></a>
+                    <a href="https://instagram.com" target="_blank"><img src="Images/instagram_icon.png" alt="Instagram" class="social-icon"></a>
+                    <a href="https://wa.me" target="_blank"><img src="Images/whatsapp_icon.png" alt="WhatsApp" class="social-icon"></a>
+                    <a href="https://tiktok.com" target="_blank"><img src="Images/tiktok_icon.png" alt="TikTok" class="social-icon"></a>
+                    <a href="https://linkedin.com" target="_blank"><img src="Images/linkedin_icon.png" alt="LinkedIn" class="social-icon"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Fenêtre modale -->
+<div id="noterModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <!-- Contenu de noter_notre_prestation.html ici -->
+        <h2 style="color:red; text-align:center;">Noter notre prestation</h2>
+        <form id="satisfaction-form">
+            <!-- Section pour les emojis -->
+            <div class="emoji-section" style="text-align:center; margin-bottom:20px;">
+                <label><input type="radio" name="satisfaction" value="1"><span>😠</span></label>
+                <label><input type="radio" name="satisfaction" value="2"><span>😕</span></label>
+                <label><input type="radio" name="satisfaction" value="3"><span>😐</span></label>
+                <label><input type="radio" name="satisfaction" value="4"><span>😶</span></label>
+                <label><input type="radio" name="satisfaction" value="5"><span>😕</span></label>
+                <label><input type="radio" name="satisfaction" value="6"><span>😐</span></label>
+                <label><input type="radio" name="satisfaction" value="7"><span>🙂</span></label>
+                <label><input type="radio" name="satisfaction" value="8"><span>😊</span></label>
+                <label><input type="radio" name="satisfaction" value="9"><span>😃</span></label>
+                <label><input type="radio" name="satisfaction" value="10"><span>😁</span></label>
+            </div>
+
+            <!-- Section dynamique si la note est <= 6 -->
+            <div id="details-section" class="hidden" style="text-align:center;">
+                <h3>Raison de votre insatisfaction :</h3>
+                <select name="reason">
+                    <option value="reservations">Prise en compte des réservations</option>
+                    <option value="payment">Service de paiement</option>
+                    <option value="complaints">Traitement des réclamations</option>
+                    <option value="other">Autres</option>
+                </select>
+                <textarea name="details" placeholder="Veuillez détailler votre insatisfaction..."></textarea>
+            </div>
+
+            <!-- Bouton pour soumettre avec l'effet fusée -->
+            <button type="submit" class="submit-btn" style="display:block;margin:20px auto;">🚀 Envoyer</button>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("noterModal");
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtn = document.querySelector(".close");
+    const form = document.getElementById("satisfaction-form");
+    const detailsSection = document.getElementById("details-section");
+    const selectedScoreDisplay = document.createElement('div'); // Pour afficher la note sélectionnée
+    selectedScoreDisplay.classList.add('selected-score');
+
+    // Ajouter le div dans la section emoji
+    document.querySelector('.emoji-section').appendChild(selectedScoreDisplay);
+
+    // Ouvrir la modale
+    openModalBtn.addEventListener("click", function () {
+        modal.style.display = "block";
+    });
+
+    // Fermer la modale
+    closeModalBtn.addEventListener("click", function () {
+        modal.style.display = "none";
+    });
+
+    // Fermer la modale si on clique en dehors de celle-ci
+    window.addEventListener("click", function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+
+    // Gestion de la sélection des emojis
+    form.addEventListener("change", function (event) {
+        const selectedScore = form.querySelector('input[name="satisfaction"]:checked');
+        if (selectedScore) {
+            const scoreValue = parseInt(selectedScore.value);
+            selectedScoreDisplay.textContent = `Vous avez sélectionné la note : ${scoreValue}/10`; // Affiche la note sélectionnée
+
+            if (scoreValue <= 6) {
+                detailsSection.classList.remove("hidden");
+            } else {
+                detailsSection.classList.add("hidden");
+            }
+        }
+    });
+
+    // Soumission du formulaire
+    form.addEventListener("submit", function (event) {
+        event.preventDefault(); // Empêche l'envoi normal
+
+        alert("Nous vous remercions vivement de votre contribution pour ce retour ! Nous prenons en compte vos ressentis pour ameliorer notre service."); // Feedback rapide pour l'utilisateur
+
+        modal.style.display = "none"; // Fermer la modale après soumission
+
+        // Redirection vers la page principale avec l'apostrophe corrigée
+        window.location.href = "Test0'.html"; // Retour à la page principale
+    });
+});
+
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let slides = document.getElementsByClassName("slide");
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none"; // Masquer toutes les images
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1; } // Revenir à la première image
+        slides[slideIndex - 1].style.display = "block"; // Afficher l'image active
+        setTimeout(showSlides, 4000); // Changer d'image toutes les 4 secondes
+    }
+
+
+
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    const sectionA = document.getElementById('sectionA');
+    const sectionB = document.getElementById('sectionB');
+    const sectionA2 = document.getElementById('sectionA2');
+    const sectionB2 = document.getElementById('sectionB2');
+
+    </script>
+</body>
+</html>
